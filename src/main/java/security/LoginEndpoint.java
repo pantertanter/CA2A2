@@ -46,11 +46,11 @@ public class LoginEndpoint {
             username = json.get("username").getAsString();
             password = json.get("password").getAsString();
         } catch (Exception e) {
-           throw new API_Exception("Malformed JSON Suplied",400,e);
+           throw new API_Exception("Malformed JSON Supplied",400,e);
         }
 
         try {
-            User user = USER_FACADE.getVeryfiedUser(username, password);
+            User user = USER_FACADE.getVerifiedUser(username, password);
             String token = createToken(username, user.getRolesAsStrings());
             JsonObject responseJson = new JsonObject();
             responseJson.addProperty("username", username);

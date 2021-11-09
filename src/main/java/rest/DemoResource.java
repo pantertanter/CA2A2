@@ -56,8 +56,8 @@ public class DemoResource {
     @Path("user")
     @RolesAllowed("user")
     public String getFromUser() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to User: " + thisUser + "\"}";
     }
 
     @GET
@@ -65,7 +65,7 @@ public class DemoResource {
     @Path("admin")
     @RolesAllowed("admin")
     public String getFromAdmin() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return "{\"msg\": \"Hello to (admin) User: " + thisUser + "\"}";
     }
 }
