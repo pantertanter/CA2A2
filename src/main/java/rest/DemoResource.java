@@ -1,7 +1,11 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.User;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
@@ -15,14 +19,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
+import utils.HttpUtils;
 
 /**
  * @author lam@cphbusiness.dk
  */
 @Path("info")
 public class DemoResource {
-    
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+
     @Context
     private UriInfo context;
 
@@ -67,5 +74,16 @@ public class DemoResource {
     public String getFromAdmin() {
         String thisUser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisUser + "\"}";
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("sequential")
+    public String getSequentialDemo() throws IOException {
+        List<String> urls = new ArrayList<>();
+        urls.add("https://en.wikipedia.org/api/rest_v1/page/random/summary");
+        urls.add("https://en.wikipedia.org/api/rest_v1/page/random/summary");
+        List<String> res = HttpUtils.runSequential(urls);
+        return GSON.toJson(res);
     }
 }
