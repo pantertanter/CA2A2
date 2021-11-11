@@ -2,8 +2,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nimbusds.jose.shaded.json.JSONObject;
 import deserializer.WikipediaArticleDeserializer;
+import dtos.DadJokeDTO;
 import dtos.WikipediaArticleDTO;
 import entities.User;
 
@@ -95,6 +95,21 @@ public class DemoResource {
                 .setPrettyPrinting()
                 .create();
         rawJsonStrings.forEach(s -> resDTOs.add(WikipediaArticleGson.fromJson(s, WikipediaArticleDTO.class)));
+        return GSON.toJson(resDTOs);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("parallel")
+    public String getParallelDemo() throws IOException {
+        List<String> urls = new ArrayList<>();
+        urls.add("https://icanhazdadjoke.com");
+        urls.add("https://icanhazdadjoke.com");
+
+        List<String> rawJsonStrings = HttpUtils.runSequential(urls);
+        List<DadJokeDTO> resDTOs = new ArrayList<>();
+
+        rawJsonStrings.forEach(s -> resDTOs.add(GSON.fromJson(s, DadJokeDTO.class)));
         return GSON.toJson(resDTOs);
     }
 }

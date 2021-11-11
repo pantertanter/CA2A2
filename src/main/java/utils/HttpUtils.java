@@ -7,6 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class HttpUtils {
     public static String fetch(String _url) throws IOException {
@@ -27,8 +31,17 @@ public class HttpUtils {
         return sb.toString();
     }
 
-    public static List<String> runParallel(List<String> urls) {
-        return null;
+    public static List<String> runParallel(List<String> urls) throws IOException, ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        List<Future<String>> futures = new ArrayList<>();
+        for (String url : urls) {
+            futures.add(executor.submit(() -> HttpUtils.fetch(url)));
+        }
+        List<String> res = new ArrayList<>();
+        for (Future<String> future : futures) {
+            res.add(future.get());
+        }
+        return res;
     }
 
     public static List<String> runSequential(List<String> urls) throws IOException {
