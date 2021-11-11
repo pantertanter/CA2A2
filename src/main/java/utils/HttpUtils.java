@@ -66,6 +66,7 @@ public class HttpUtils {
 
         CombinedFunStuffDTO combined = new CombinedFunStuffDTO(dad, chuck, singleLineJoke, bread, yoMama, geek, cat, friends);
 
+        executor.shutdown();
         // could also return a DTO, and then it would be parsed to JSON later.
         return gson.toJson(combined);
     }
@@ -80,6 +81,8 @@ public class HttpUtils {
         for (Future<String> future : futures) {
             res.add(future.get());
         }
+        // I'm not sure if this is necessary.
+        executor.shutdown();
         return res;
     }
 
