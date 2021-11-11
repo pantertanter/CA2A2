@@ -16,7 +16,7 @@ public class HttpUtils {
         con.setRequestProperty("Accept", "application/json");
         con.setRequestProperty("User-Agent", "server");
 
-        // probably overkill with only API calls
+        // probably overkill with only API calls since JSON is only one line.
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String out;

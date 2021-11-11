@@ -2,6 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import deserializer.WikipediaArticleDeserializer;
+import dtos.WikipediaArticleDTO;
 import entities.User;
 
 import java.io.IOException;
@@ -83,7 +86,15 @@ public class DemoResource {
         List<String> urls = new ArrayList<>();
         urls.add("https://en.wikipedia.org/api/rest_v1/page/random/summary");
         urls.add("https://en.wikipedia.org/api/rest_v1/page/random/summary");
-        List<String> res = HttpUtils.runSequential(urls);
-        return GSON.toJson(res);
+
+        List<String> rawJsonStrings = HttpUtils.runSequential(urls);
+        List<WikipediaArticleDTO> resDTOs = new ArrayList<>();
+
+        Gson WikipediaArticleGson = new GsonBuilder()
+                .registerTypeAdapter(WikipediaArticleDTO.class, new WikipediaArticleDeserializer())
+                .setPrettyPrinting()
+                .create();
+        rawJsonStrings.forEach(s -> resDTOs.add(WikipediaArticleGson.fromJson(s, WikipediaArticleDTO.class)));
+        return GSON.toJson(resDTOs);
     }
 }
