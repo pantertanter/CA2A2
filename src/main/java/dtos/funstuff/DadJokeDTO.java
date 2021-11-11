@@ -1,4 +1,4 @@
-package dtos;
+package dtos.funstuff;
 
 public class DadJokeDTO {
     private String id;

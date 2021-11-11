@@ -3,13 +3,14 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import deserializer.WikipediaArticleDeserializer;
-import dtos.DadJokeDTO;
+import dtos.funstuff.DadJokeDTO;
 import dtos.WikipediaArticleDTO;
 import entities.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -111,5 +112,12 @@ public class DemoResource {
 
         rawJsonStrings.forEach(s -> resDTOs.add(GSON.fromJson(s, DadJokeDTO.class)));
         return GSON.toJson(resDTOs);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("jokes")
+    public String getJokes() throws ExecutionException, InterruptedException {
+        return HttpUtils.fetchJokes();
     }
 }
