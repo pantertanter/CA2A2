@@ -26,7 +26,7 @@ public class HttpUtils {
         con.setRequestProperty("User-Agent", "server");
 
         // probably overkill with only API calls since JSON is only one line.
-        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
         StringBuilder sb = new StringBuilder();
         String out;
         while ((out = br.readLine()) != null) {
