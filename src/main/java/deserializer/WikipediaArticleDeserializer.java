@@ -14,7 +14,10 @@ public class WikipediaArticleDeserializer implements JsonDeserializer<WikipediaA
         int pageid = jsonObject.get("pageid").getAsInt();
         String extract = jsonObject.get("extract").getAsString();
         String url = jsonObject.get("content_urls").getAsJsonObject().get("desktop").getAsJsonObject().get("page").getAsString();
-        String thumbnail_source = jsonObject.get("thumbnail").getAsJsonObject().get("source").getAsString();
-        return new WikipediaArticleDTO(title, description, pageid, extract, url, thumbnail_source);
+        JsonObject thumbnail = jsonObject.get("thumbnail").getAsJsonObject();
+        String thumbnail_source = thumbnail.get("source").getAsString();
+        int thumbnail_width = thumbnail.get("width").getAsInt();
+        int thumbnail_height = thumbnail.get("height").getAsInt();
+        return new WikipediaArticleDTO(title, description, pageid, extract, url, thumbnail_source, thumbnail_width, thumbnail_height);
     }
 }
