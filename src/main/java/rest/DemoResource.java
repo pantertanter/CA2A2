@@ -102,12 +102,12 @@ public class DemoResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("parallel")
-    public String getParallelDemo() throws IOException {
+    public String getParallelDemo() throws IOException, ExecutionException, InterruptedException {
         List<String> urls = new ArrayList<>();
         urls.add("https://icanhazdadjoke.com");
         urls.add("https://icanhazdadjoke.com");
 
-        List<String> rawJsonStrings = HttpUtils.runSequential(urls);
+        List<String> rawJsonStrings = HttpUtils.runParallel(urls);
         List<DadJokeDTO> resDTOs = new ArrayList<>();
 
         rawJsonStrings.forEach(s -> resDTOs.add(GSON.fromJson(s, DadJokeDTO.class)));
