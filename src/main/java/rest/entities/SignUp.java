@@ -1,5 +1,7 @@
 package rest.entities;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +11,8 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from RenameMe")
-public class RenameMe implements Serializable {
+@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from SignUp")
+public class SignUp implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,10 +52,56 @@ public class RenameMe implements Serializable {
         return rolesAsStrings;
     }
 
-    public RenameMe() {
+    public SignUp() {}
+
+    public boolean verifyPassword(String pw){
+        return BCrypt.checkpw(pw, userPass);
     }
 
-    
+    public SignUp(String userName, String userPass) {
+        this.userName = userName;
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPass() {
+        return userPass;
+    }
+
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
 }
 
 

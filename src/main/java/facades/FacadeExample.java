@@ -1,7 +1,8 @@
 package facades;
 
-import dtos.RenameMeDTO;
-import rest.entities.RenameMe;
+import dtos.SignUpDTO;
+import dtos.SignUpDTO;
+import rest.entities.SignUp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,8 +41,8 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
     
-    public RenameMeDTO create(RenameMeDTO rm){
-        RenameMe rme = new RenameMe(rm.getUserName(), rm.getUserPass());
+    public SignUpDTO create(SignUpDTO rm){
+        SignUp rme = new SignUp(rm.getUserName(), rm.getUserPass());
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -50,32 +51,32 @@ public class FacadeExample {
         } finally {
             em.close();
         }
-        return new RenameMeDTO(rme);
+        return new SignUpDTO(rme);
     }
-    public RenameMeDTO getById(long id) throws NotFoundException { //throws RenameMeNotFoundException {
+    public SignUpDTO getById(long id) throws NotFoundException { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
-        RenameMe rm = em.find(RenameMe.class, id);
+        SignUp rm = em.find(SignUp.class, id);
         if (rm == null)
             throw new NotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new RenameMeDTO(rm);
+        return new SignUpDTO(rm);
     }
     
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getSignUpCount(){
         EntityManager em = getEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
+            long signUpCount = (long)em.createQuery("SELECT COUNT(r) FROM SignUp r").getSingleResult();
+            return signUpCount;
         }finally{  
             em.close();
         }
     }
     
-    public List<RenameMeDTO> getAll(){
+    public List<SignUpDTO> getAll(){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<RenameMe> query = em.createQuery("SELECT r FROM RenameMe r", RenameMe.class);
-        List<RenameMe> rms = query.getResultList();
-        return RenameMeDTO.getDtos(rms);
+        TypedQuery<SignUp> query = em.createQuery("SELECT r FROM SignUp r", SignUp.class);
+        List<SignUp> rms = query.getResultList();
+        return SignUpDTO.getDtos(rms);
     }
     
     public static void main(String[] args) {

@@ -58,8 +58,6 @@ public class User implements Serializable {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
   }
-
-
   public String getUserName() {
     return userName;
   }

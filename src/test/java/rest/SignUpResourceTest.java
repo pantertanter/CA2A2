@@ -1,6 +1,6 @@
 package rest;
 
-import rest.entities.RenameMe;
+import rest.entities.SignUp;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
 
-public class RenameMeResourceTest {
+public class SignUpResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static RenameMe r1, r2;
+    private static SignUp r1, r2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -63,8 +63,8 @@ public class RenameMeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new RenameMe("Some txt", "More text");
-        r2 = new RenameMe("aaa", "bbb");
+        r1 = new SignUp("Some txt", "More text");
+        r2 = new SignUp("aaa", "bbb");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();

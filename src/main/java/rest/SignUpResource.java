@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("xxx")
-public class RenameMeResource {
+public class SignUpResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
        
@@ -29,7 +29,7 @@ public class RenameMeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
        
-        long count = FACADE.getRenameMeCount();
+        long count = FACADE.getSignUpCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
