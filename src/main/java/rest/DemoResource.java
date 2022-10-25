@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import deserializer.WikipediaArticleDeserializer;
 import dtos.funstuff.DadJokeDTO;
 import dtos.WikipediaArticleDTO;
-import entities.User;
+import rest.entities.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class DemoResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery ("select u from User u",entities.User.class);
+            TypedQuery<User> query = em.createQuery ("select u from User u", User.class);
             List<User> users = query.getResultList();
             return "[" + users.size() + "]";
         } finally {

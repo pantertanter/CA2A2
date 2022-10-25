@@ -1,4 +1,4 @@
-package entities;
+package rest.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -22,12 +22,12 @@ public class RenameMe implements Serializable {
     
     // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
     // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
-    private String dummyStr1;
-    private String dummyStr2;
+    private String userName;
+    private String userPass;
 
-    public RenameMe(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
+    public RenameMe(String userName, String userPass) {
+        this.userName = userName;
+        this.userPass = userPass;
     }
 
     public Long getId() {
@@ -37,25 +37,20 @@ public class RenameMe implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getDummyStr1() {
-        return dummyStr1;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.dummyStr1 = dummyStr1;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getDummyStr2() {
-        return dummyStr2;
+    public String getUserPass() {
+        return userPass;
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.dummyStr2 = dummyStr2;
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
     }
-    
-    
-    
-
-   
 }

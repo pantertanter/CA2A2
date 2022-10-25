@@ -5,7 +5,7 @@
  */
 package dtos;
 
-import entities.RenameMe;
+import rest.entities.RenameMe;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class RenameMeDTO {
     private long id;
-    private String str1;
-    private String str2;
+    private String userName;
+    private String userPass;
 
-    public RenameMeDTO(String dummyStr1, String dummyStr2) {
-        this.str1 = dummyStr1;
-        this.str2 = dummyStr2;
+    public RenameMeDTO(String userName, String userPass) {
+        this.userName = userName;
+        this.userPass = userPass;
     }
-    
+
     public static List<RenameMeDTO> getDtos(List<RenameMe> rms){
         List<RenameMeDTO> rmdtos = new ArrayList();
         rms.forEach(rm->rmdtos.add(new RenameMeDTO(rm)));
@@ -33,34 +33,33 @@ public class RenameMeDTO {
     public RenameMeDTO(RenameMe rm) {
         if(rm.getId() != null)
             this.id = rm.getId();
-        this.str1 = rm.getDummyStr1();
-        this.str2 = rm.getDummyStr2();
+        this.userName = rm.getUserName();
+        this.userPass = rm.getUserPass();
     }
 
-    public String getDummyStr1() {
-        return str1;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDummyStr1(String dummyStr1) {
-        this.str1 = dummyStr1;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getDummyStr2() {
-        return str2;
+    public String getUserPass() {
+        return userPass;
     }
 
-    public void setDummyStr2(String dummyStr2) {
-        this.str2 = dummyStr2;
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
     }
 
     @Override
     public String toString() {
-        return "RenameMeDTO{" + "id=" + id + ", str1=" + str1 + ", str2=" + str2 + '}';
+        return "RenameMeDTO{" + "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPass='" + userPass + '\'' +
+                '}';
     }
-    
-    
-    
-    
-    
-    
+
+
 }
