@@ -1,6 +1,6 @@
 package facades;
 
-import entities.User;
+import rest.entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import security.errorhandling.AuthenticationException;

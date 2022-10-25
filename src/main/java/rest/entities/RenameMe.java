@@ -1,11 +1,11 @@
 package rest.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -16,41 +16,44 @@ public class RenameMe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    public RenameMe() {
-    }  
-    
-    // TODO, delete this class, or rename to an Entity class that makes sense for what you are about to do
-    // Delete EVERYTHING below if you decide to use this class, it's dummy data used for the initial demo
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "user_name", length = 25)
     private String userName;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "user_pass")
     private String userPass;
 
-    public RenameMe(String userName, String userPass) {
-        this.userName = userName;
-        this.userPass = userPass;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "user_roles", length = 25)
+    private String roleName;
+
+    @JoinTable(name = "user_roles", joinColumns = {
+            @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
+            @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
+    @ManyToMany
+    private List<Role> roleList = new ArrayList<>();
+
+    public List<String> getRolesAsStrings() {
+        if (roleList.isEmpty()) {
+            return null;
+        }
+        List<String> rolesAsStrings = new ArrayList<>();
+        roleList.forEach((role) -> {
+            rolesAsStrings.add(role.getRoleName());
+        });
+        return rolesAsStrings;
     }
 
-    public Long getId() {
-        return id;
+    public RenameMe() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPass() {
-        return userPass;
-    }
-
-    public void setUserPass(String userPass) {
-        this.userPass = userPass;
-    }
+    
 }
+
+

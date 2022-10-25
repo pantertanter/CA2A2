@@ -1,8 +1,8 @@
 package utils;
 
 
-import entities.Role;
-import entities.User;
+import rest.entities.Role;
+import rest.entities.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
