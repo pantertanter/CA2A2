@@ -39,7 +39,7 @@ public class FacadeExampleTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("SignUp.deleteAllRows").executeUpdate();
+            //em.createNamedQuery("SignUp.deleteAllRows").executeUpdate();
             em.persist(new SignUp("Some txt", "More text"));
             em.persist(new SignUp("aaa", "bbb"));
 

@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@NamedQuery(name = "RenameMe.deleteAllRows", query = "DELETE from SignUp")
+@NamedQuery(name = "SignUp.deleteAllRows", query = "DELETE from SignUp")
 public class SignUp implements Serializable {
 
     private static final long serialVersionUID = 1L;
