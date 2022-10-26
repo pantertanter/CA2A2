@@ -25,7 +25,7 @@ public class SignUpResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static SignUp r1, r2;
+    private static SignUp s1, s2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -63,13 +63,13 @@ public class SignUpResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new SignUp("Some txt", "More text");
-        r2 = new SignUp("aaa", "bbb");
+        s1 = new SignUp("Alan", "Tissel123");
+        s2 = new SignUp("Povl", "Uzo456");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("SignUp.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2);
+            em.persist(s1);
+            em.persist(s2);
             em.getTransaction().commit();
         } finally {
             em.close();
